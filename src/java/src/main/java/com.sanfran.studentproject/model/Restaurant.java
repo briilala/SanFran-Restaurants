@@ -14,17 +14,14 @@ public class Restaurant {
   private String name;
   private String address;
   private String locationDescription;
-  private ArrayList<String> foodItems;
+  private String foodItems;
   private double latitude;
   private double longitude;
-  private double location;
-  private int size;
+  private String location;
+  private String schedule;
 
   public Restaurant() {
   }
-
-  // public void init(){
-  // }
 
   public int getId()
   {
@@ -56,24 +53,25 @@ public class Restaurant {
     this.address = address;
   }
 
-  public String getLocoDescript()
+  public String getLocationDescription()
   {
     return locationDescription;
   }
 
-  public void setLocoDescript(String locationDescription)
+  public void setLocationDescription(String locationDescription)
   {
     this.locationDescription = locationDescription;
   }
 
-  public ArrayList<String> getFoodItems()
+  public String getFoodItems()
   {
     return foodItems;
   }
 
   public void setFoodItems(String foodItems)
   {
-    this.foodItems.add(foodItems);
+    //this.foodItems.add(foodItems);
+    this.foodItems = foodItems;
   }
 
   public double getLatitude()
@@ -96,23 +94,13 @@ public class Restaurant {
     this.longitude = longitude;
   }
 
-  public double getLocation()
+  public String getLocation()
   {
     return location;
   }
 
-  public void setLocation(double location)
+  public void setLocation(String location)
   {
     this.location = location;
-  }
-
-  public int getSize()
-  {
-    return size;
-  }
-
-  public void setSize()
-  {
-    this.size++;
   }
 }
