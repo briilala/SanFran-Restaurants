@@ -20,6 +20,16 @@ public class Restaurant {
   private String location;
   private String schedule;
 
+  public int getId()
+  {
+    return id;
+  }
+
+  public void setId(int id)
+  {
+    this.id = id;
+  }
+
   public Restaurant() {
   }
 

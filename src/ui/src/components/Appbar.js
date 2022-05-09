@@ -8,8 +8,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 export default function Appbar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+    <Box sx={{ flexGrow: 1, color: "#29b9ab" }}>
+      <AppBar position="static" style={{background: '#2E3B55'}}>
         <Toolbar>
           <IconButton
             size="large"
