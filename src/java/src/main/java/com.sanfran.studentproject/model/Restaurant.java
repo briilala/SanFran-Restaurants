@@ -23,16 +23,6 @@ public class Restaurant {
   public Restaurant() {
   }
 
-  public int getId()
-  {
-    return id;
-  }
-
-  public void setId(int id)
-  {
-    this.id = id;
-  }
-
   public String getName()
   {
     return name;
@@ -70,7 +60,6 @@ public class Restaurant {
 
   public void setFoodItems(String foodItems)
   {
-    //this.foodItems.add(foodItems);
     this.foodItems = foodItems;
   }
 

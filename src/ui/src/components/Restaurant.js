@@ -10,30 +10,24 @@ export default function Restaurant() {
   const paperStyle={height: 600, padding: '20px 20px 0px 20px', width:600,margin:"0px 0px"}
   const [name, setName]=useState('')
   const [address, setAdress]=useState('')
-  const [locationDescription, setLocationDescription]=useState('')
   const [foodItems, setFoodItems]=useState('')
-  const [latitude, setLatitude]=useState('')
-  const [longitude, setLongitude]=useState('')
-  const [restaurants, setrestaurants]=useState([])
-  // const [showDetailClick, setShowDetailClick] = useState(null);
-  // const showDetails = (params) => {
-  //   setShowDetailClick(params);
-  // }
+  const [restaurants, setRestaurants]=useState([])
+  const [showDetailClick, setShowDetailClick] = useState(null);
+  const showDetails = (params) => {
+    console.log(params);
+    setShowDetailClick(params);
+  }
   const columns = [
-    {field: 'name', headerName: 'Name', width:200},
+    {field: 'name', headerName: 'Name', width:300},
     {field: 'address', headerName: 'Address', width: 300},
-    {field: 'locationDescription', headerName: 'Location Description', width:300},
-    {field: 'foodItems', headerName: 'Food Items'},
-    {field: 'latitude', headerName: 'Latitude'},
-    {field: 'longitude', headerName: 'Longitude'},
-    {field: 'location', headerName: 'Location'}]
+    {field: 'foodItems', headerName: 'Food Items', width: 300}]
 
 
   const [tableData, setTableData]=useState([])
 
   const handleClick=(e)=>{
     e.preventDefault()
-    const restaurant={name, address, locationDescription, foodItems, latitude, longitude}
+    const restaurant={name, address, foodItems}
     console.log(restaurant)
     fetch("http://localhost:8080/restaurant/add",{
       method:"POST",
@@ -42,6 +36,7 @@ export default function Restaurant() {
   }).then(()=>{
     console.log("New restaurnat added")
   })
+  window.location.reload(false);
 }
 
 useEffect(()=>{
@@ -50,9 +45,8 @@ useEffect(()=>{
   .then((output)=>setTableData(output));
 }, [])
 
-console.log(tableData);
-
   return (
+
     <div style={{ display: 'flex', height: 700, width: '100%' }}>
 
       <div style={{ display: 'flex', height: '100%', width: '70%', margin:"20px 5px"}}>
@@ -62,17 +56,32 @@ console.log(tableData);
             rows={tableData}
             columns={columns}
             pageSize={100}
-            //onCellClick={showDetails}
+            onCellClick={showDetails}
             />
-            
-
         </div>
       </div>
 
       <div style={{ display: 'flex', height: '100%', width: '30%' }}>
         <div style={{ flexGrow: 1 }}>
-          <Paper elevation={3} style={{height: '100%'}}>
-            <h1 style={{color:"purple"}}><u> Add a Restaurant </u></h1>
+
+          <Paper elevation={3} style={{height: '50%'}}>
+          <h1 style={{color:"purple"}}><u> Restaurant Details</u></h1>
+          <h3 style = {{color:"black"}}>
+
+          <div style={{whiteSpace: "pre-wrap"}}>{showDetailClick &&
+          `Name: ${showDetailClick.row.name}`}</div>
+
+          <div style={{whiteSpace: "pre-wrap"}}>{showDetailClick &&
+          `Address: ${showDetailClick.row.address}`}</div>
+
+          <div style={{whiteSpace: "pre-wrap"}}>{showDetailClick &&
+          `Food Items: ${showDetailClick.row.foodItems}`}</div>
+
+    {!showDetailClick && `Click on a restaurant`}
+    </h3>
+    </Paper>
+    <Paper elevation={3} style={{height: '50%'}}>
+            <h1 style={{color:"purple"}}><u> Add Restaurant </u></h1>
               <Grid
                 component="form"
                   sx={{'& > :not(style)': { m: 1, width: '25ch' },
@@ -89,22 +98,12 @@ console.log(tableData);
             value={address}
             onChange={(e)=>setAdress(e.target.value)}
             />
-            <TextField required id="outlined-basic" label="Location Description" variant="outlined"
-            value={locationDescription}
-            onChange={(e)=>setLocationDescription(e.target.value)}
-            />
+
             <TextField id="outlined-basic" label="Food Items" variant="outlined"
             value={foodItems}
             onChange={(e)=>setFoodItems(e.target.value)}
             />
-            <TextField id="outlined-basic" label="Latitude" variant="outlined"
-            value={latitude}
-            onChange={(e)=>setLatitude(e.target.value)}
-            />
-            <TextField id="outlined-basic" label="Longitude" variant="outlined"
-            value={longitude}
-            onChange={(e)=>setLongitude(e.target.value)}
-            />
+
             <Button variant="contained" color="secondary" onClick={handleClick}>ADD</Button>
           </Grid>
 
